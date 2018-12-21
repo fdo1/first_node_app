@@ -74,6 +74,7 @@ var unifiedServer = function(request, response) {
       statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
 
       // Use the payload called back by the handler, or default to an empty object
+      console.log((payload));
       paylod = typeof(payload) == 'object' ? payload : {};
 
       // Convert the payload to string
@@ -94,10 +95,8 @@ var unifiedServer = function(request, response) {
 // Define the handlers
 var handlers = {};
 
-// Sample handler
-handlers.sample = function(data, callback){
-  // Callback a HTTP status code and a payload object
-  callback(406, { 'name': 'sample handler' });
+handlers.ping = function(data, callback) {
+  callback(200);
 }
 
 // Define the Not Found handler
@@ -107,5 +106,5 @@ handlers.notFound = function(data, callback){
 
 // Define a request router
 var router = {
-  'sample': handlers.sample
+  'ping': handlers.ping
 }
