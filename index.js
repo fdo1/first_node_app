@@ -5,6 +5,13 @@ var url = require('url');
 var config = require('./config');
 var StringDecoder = require('string_decoder').StringDecoder;
 var fs = require('fs'); // This is the File System
+var _data = require('./lib/data');
+
+// TEST
+// @TODO delete this
+_data.read('test', 'newFile', function(error, data) {
+  console.log('Got error: ', error, ' and the data is: ', data);
+})
 
 // Instantiate the HTTP server
 var httpServer = http.createServer(function(request, response){
