@@ -9,8 +9,8 @@ var _data = require('./lib/data');
 
 // TEST
 // @TODO delete this
-_data.read('test', 'newFile', function(error, data) {
-  console.log('Got error: ', error, ' and the data is: ', data);
+_data.delete('test', 'newFile', function(error) {
+  console.log('Got error: ', error);
 })
 
 // Instantiate the HTTP server
