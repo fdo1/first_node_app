@@ -6,30 +6,9 @@ var assert = require('assert');
 // Application runner for the test runner
 _app = {};
 
-_app.tests = {
-  'unit': {}
-};
+_app.tests = {};
 
-// Assert that the getANumber function is returning a number
-_app.tests.unit['helpers.getANumber should return a number'] = function(done){
-  var val = helpers.getANumber();
-  assert.equal(typeof(val), 'number');
-  done();
-};
-
-// Assert that the getANumber function is returning 1
-_app.tests.unit['helpers.getANumber should return 1'] = function(done){
-  var val = helpers.getANumber();
-  assert.equal(val, 1);
-  done();
-};
-
-// Assert that the getANumber function is returning 2
-_app.tests.unit['helpers.getANumber should return 2'] = function(done){
-  var val = helpers.getANumber();
-  assert.equal(val, 2);
-  done();
-};
+_app.tests.unit = require('./unit');
 
 // Count all the tests
 _app.countTests = function(){
@@ -79,6 +58,7 @@ _app.runTests = function(){
   var limit = _app.countTests();
   var counter = 0;
   for(var key in _app.tests){
+    console.log(_app.tests);
     if (_app.tests.hasOwnProperty(key)){
       var subTests = _app.tests[key];
       for (var testName in subTests) {
@@ -96,7 +76,6 @@ _app.runTests = function(){
                 if (counter == limit){
                   _app.produceTestReport(limit, successes, errors);
                 }
-                
               });
             } catch(e){
               // If it throws, then it failed. Capture the error and log it in red
