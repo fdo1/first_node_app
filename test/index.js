@@ -3,12 +3,16 @@
 var helpers = require('./../lib/helpers');
 var assert = require('assert');
 
+// Override the NODE_ENV variable
+process.env.NODE_ENV = 'testing';
+
 // Application runner for the test runner
 _app = {};
 
 _app.tests = {};
 
 _app.tests.unit = require('./unit');
+_app.tests.api = require('./api');
 
 // Count all the tests
 _app.countTests = function(){
@@ -48,6 +52,7 @@ _app.produceTestReport = function(limit, successes, errors){
 
   console.log('')
   console.log('------ End Test Report ------');
+  process.exit(0);
 }
 
 // Run all the tests colleting the errors and successes
@@ -58,7 +63,6 @@ _app.runTests = function(){
   var limit = _app.countTests();
   var counter = 0;
   for(var key in _app.tests){
-    console.log(_app.tests);
     if (_app.tests.hasOwnProperty(key)){
       var subTests = _app.tests[key];
       for (var testName in subTests) {
